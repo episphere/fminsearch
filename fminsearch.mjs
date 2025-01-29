@@ -35,7 +35,7 @@ function fminsearch(fun,Parm0,x,y,Opt){// fun = function(x,Parm)
 	// Parms=fminsearch(fun,[100,30,10,5000],x,y,{maxIter:10000,display:false})
 	
 	if(!Opt){Opt={}};
-	if(!Opt.maxIter){Opt.maxIter=1000};
+	if(!Opt.maxIter){Opt.maxIter=100};
 	if(!Opt.step){// initial step is 1/100 of initial value (remember not to use zero in Parm0)
 		Opt.step=Parm0.map(function(p){return p/100});
 		Opt.step=Opt.step.map(function(si){if(si==0){return 1}else{ return si}}); // convert null steps into 1's
