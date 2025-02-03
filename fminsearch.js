@@ -1,14 +1,3 @@
-// moving fminsearch to ES6 - under development!
-
-console.log(`fminsearch ES6 module loaded\n${Date()}`)
-const plotly = (await import('https://cdn.jsdelivr.net/npm/plotly.js-dist@3.0.0/+esm')).default
-
-function logistic(x,P){
-    return x.map(
-        xi => 1 / (1 + Math.exp(-(P[0] + (P[1] * xi))))
-    )
-}
-
 function fminsearch(fun,Parm0,x,y,Opt){// fun = function(x,Parm)
 	// example
 	//
@@ -20,7 +9,7 @@ function fminsearch(fun,Parm0,x,y,Opt){// fun = function(x,Parm)
 	// Another test for the same function:
 	// x=[32,37,42,47,52,57,62,67,72,77,82,87,92];y=[0,34,59,77,99,114,121,133,146,159,165,173,170];
 	//
-	// Opt is an object with all other parameters, from the objective function (cost function), to the 
+	// Opt is an object will all other parameters, from the objective function (cost function), to the 
 	// number of iterations, initial step vector and the display switch, for example
 	// Parms=fminsearch(fun,[100,30,10,5000],x,y,{maxIter:10000,display:false})
 	
@@ -58,9 +47,3 @@ function fminsearch(fun,Parm0,x,y,Opt){// fun = function(x,Parm)
 	//}
 	return P0
 };
-
-export{
-	fminsearch,
-	logistic,
-	plotly
-}

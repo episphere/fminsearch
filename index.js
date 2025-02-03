@@ -28,13 +28,14 @@ console.log(`index.js loaded \n${Date()}`);
         console.log(`Demo\n${Date()}`);
         let logistic = (await import("./fun.mjs")).logistic
         // let x=[0,1,2,3,4,5,6,7,8,9]
-        let x = [...Array(400)].map( (_, z) => (z - 200) / 5)
-        let y = logistic(x, [0.1, 0.2]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
+        let x = [...Array(200)].map( (_, z) => (z - 100) / 5)
+        let y = logistic(x, [-0.1, 0.2]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
         let Parms = fminsearch.fminsearch(logistic,[0.5,0.5],x,y)
-        let z = fminsearch.fminsearch(x,Parms)
+        let z = logistic(x,Parms)
         let traceVals = {
             x: x,
             y: y,
+            name:'values',
             mode: 'markers',
             marker: {
                 color: 'rgba(156, 165, 196, 0.5)',
@@ -46,16 +47,33 @@ console.log(`index.js loaded \n${Date()}`);
         }
         let traceModel={
             x:x,
-            y:z
+            y:z,
+            name:'fit',
+            type:'scatter',
+            line:{
+                color:'red',
+                width:3
+            }
         }
         const layout = {
             width: 500,
-            height: 500
+            height: 500,
+            title: {
+                text:`fit parameters: [${Parms.map(v=>v.toLocaleString())}]`
+            }
         }
 
         fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
+        //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
+
     }
+    // styling
+    textAreaEq.style.width="100%"
+    textAreaData.style.width="15em"
+    
+
+    
 }
 )()
 
