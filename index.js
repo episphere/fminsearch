@@ -27,6 +27,7 @@ console.log(`index.js loaded \n${Date()}`);
     demo.onclick = async function() {
         console.log(`Demo\n${Date()}`);
         let logistic = (await import("./fun.mjs")).logistic
+        textAreaEq.value = logistic.toLocaleString()
         // let x=[0,1,2,3,4,5,6,7,8,9]
         let x = [...Array(200)].map( (_, z) => (z - 100) / 5)
         let y = logistic(x, [-0.1, 0.2]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
