@@ -6,12 +6,12 @@ console.log(`index.js loaded \n${Date()}`);
     const fminsearch = await import("./fminsearch.mjs")
     let graphDiv = document.getElementById('graphDiv')
     let demo = document.getElementById('demo')
+    let modelSel = document.getElementById('modelSel')
     //let trace1 = {
     //    x:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     //    
     //}
     //debugger
-
     //assemble demo
     function randomGaussian(mean=0, standardDeviation=1) {
         let u = 0
@@ -69,6 +69,15 @@ console.log(`index.js loaded \n${Date()}`);
         //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
     }
+    // Select model
+    modelSel.onchange=async function(opt){
+        let modelName = opt.target.value
+        let model = (await import(`./fun.mjs`))[modelName]
+        textAreaEq.value = model.toLocaleString()
+    }
+    // 
+    
+    
     // styling
     textAreaEq.style.width="100%"
     textAreaData.style.width="15em"
