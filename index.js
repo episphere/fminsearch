@@ -26,6 +26,7 @@ console.log(`index.js loaded \n${Date()}`);
     }
     demo.onclick = async function() {
         console.log(`Demo\n${Date()}`);
+        modelSel.value='logistic';
         let logistic = (await import("./fun.mjs")).logistic
         textAreaEq.value = logistic.toLocaleString()
         // let x=[0,1,2,3,4,5,6,7,8,9]
@@ -74,6 +75,7 @@ console.log(`index.js loaded \n${Date()}`);
         let modelName = opt.target.value
         let model = (await import(`./fun.mjs`))[modelName]
         textAreaEq.value = model.toLocaleString()
+        // if no values provided, load test values
     }
     // 
     
