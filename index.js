@@ -67,6 +67,10 @@ console.log(`index.js loaded \n${Date()}`);
 
         fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
+        // fill data text textArea
+
+        textAreaData.value=[x,y]
+        
         //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
     }
