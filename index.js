@@ -31,7 +31,7 @@ console.log(`index.js loaded \n${Date()}`);
         textAreaEq.value = logistic.toLocaleString()
         // let x=[0,1,2,3,4,5,6,7,8,9]
         let x = [...Array(200)].map( (_, z) => (z - 100) / 5)
-        let y = logistic(x, [-0.1, 0.2]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
+        let y = logistic(x, [-Math.random()*2-1, Math.random()*2-1]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
         let Parms = fminsearch.fminsearch(logistic,[0.5,0.5],x,y)
         let z = logistic(x,Parms)
         let traceVals = {
@@ -69,16 +69,10 @@ console.log(`index.js loaded \n${Date()}`);
 
         // fill data text textArea
 
-        // textAreaData.value=[x,y]
-        //let txt = `x,y,yp`
-        //x.forEach()
-        //let txt=x.map((xi,i)=>{
-        //    return xi
-        //})
         let txt = x.map((xi,i)=>{
             return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
         })
-        textAreaData.value=`x\ty\typ`+txt.join('')
+        textAreaData.value=`x\ty\tfit`+txt.join('')
         
         //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
