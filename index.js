@@ -69,7 +69,16 @@ console.log(`index.js loaded \n${Date()}`);
 
         // fill data text textArea
 
-        textAreaData.value=[x,y]
+        // textAreaData.value=[x,y]
+        //let txt = `x,y,yp`
+        //x.forEach()
+        //let txt=x.map((xi,i)=>{
+        //    return xi
+        //})
+        let txt = x.map((xi,i)=>{
+            return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
+        })
+        textAreaData.value=`x\ty\typ`+txt.join('')
         
         //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
