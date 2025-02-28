@@ -13,6 +13,7 @@ console.log(`index.js loaded \n${Date()}`);
     //}
     //debugger
     //assemble demo
+    // testing for Ines
     function randomGaussian(mean=0, standardDeviation=1) {
         let u = 0
           , v = 0;
