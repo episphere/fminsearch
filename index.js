@@ -74,19 +74,44 @@ console.log(`index.js loaded \n${Date()}`);
             return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
         })
         textAreaData.value=`x\ty\tfit`+txt.join('')
+
+        
         
         //fminsearch.plotly.newPlot(graphDiv, [traceVals,traceModel], layout)
 
     }
+
+    let model = null
+
+    function writeData(x,y,z){
+        let txt = x.map((xi,i)=>{
+            return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
+        })
+    }
+    
     // Select model
     modelSel.onchange=async function(opt){
         let modelName = opt.target.value
-        let model = (await import(`./fun.mjs`))[modelName]
+        model = (await import(`./fun.mjs`))[modelName]
         textAreaEq.value = model.toLocaleString()
-        // if no values provided, load test values
     }
-    // 
-    
+    // load test data if it exists
+    loadTestDataBt.onclick= async function(){
+        console.log(`test data loaded ${Date()}`)
+        if(!model){ // then load logistic model by default
+            modelSel.value='logistic'
+            model = (await import(`./fun.mjs`))[modelSel.value]
+            console.log(`"${modelSel.value}" model test data imported`)
+        }
+        // check for test data
+        if(model.test){
+            console.log(`testData:`,model.test)
+            textAreaData.value=writeData(model.test.y,model.test.z)
+        }
+        console.log(model)
+        //modelSel.value
+        //4
+    }
     
     // styling
     textAreaEq.style.width="100%"
