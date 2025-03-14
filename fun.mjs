@@ -10,7 +10,7 @@ function logistic(x,P){
 logistic.test={
     x: [...Array(101)].map((_,i)=>(i)/10)
 }
-logistic.test.y=logistic(logistic.test.x,[-10,3]).map(xi=>xi.toExponential(3))
+logistic.test.y=logistic(logistic.test.x,[-10,3]).map(xi=>(xi+Math.random()*0.1-0.05).toExponential(3))
 
 // rational
 function rational(x,P){
