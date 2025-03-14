@@ -84,9 +84,13 @@ console.log(`index.js loaded \n${Date()}`);
     let model = null
 
     function writeData(x,y,z){
+        if(typeof(z)=='undefined'){ // if model values not aavilable
+            z=x.map(_=>NaN)
+        }
         let txt = x.map((xi,i)=>{
             return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
         })
+        return `x\ty\tfit`+txt.join('')
     }
     
     // Select model
@@ -106,7 +110,7 @@ console.log(`index.js loaded \n${Date()}`);
         // check for test data
         if(model.test){
             console.log(`testData:`,model.test)
-            textAreaData.value=writeData(model.test.y,model.test.z)
+            textAreaData.value=writeData(model.test.x,model.test.y)
         }
         console.log(model)
         //modelSel.value
