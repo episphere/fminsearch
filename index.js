@@ -116,13 +116,10 @@ console.log(`index.js loaded \n${Date()}`);
         //modelSel.value
         //4
     }
-    
+    textAreaEq.value = ((await import(`./fun.mjs`))['logistic']).toLocaleString()
     // styling
     textAreaEq.style.width="100%"
     textAreaData.style.width="15em"
-    
-
-    
 }
 )()
 
