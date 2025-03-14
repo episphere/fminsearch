@@ -29,7 +29,7 @@ console.log(`index.js loaded \n${Date()}`);
         console.log(`Demo\n${Date()}`);
         modelSel.value='logistic';
         let logistic = (await import("./fun.mjs")).logistic
-        textAreaEq.value = logistic.toLocaleString()
+        textAreaEq.value = logistic.toString()
         // let x=[0,1,2,3,4,5,6,7,8,9]
         let x = [...Array(200)].map( (_, z) => (z - 100) / 5)
         let y = logistic(x, [-Math.random()*2-1, Math.random()*2-1]).map(yi => (yi + (randomGaussian() - 0.5) * 0.1))
@@ -62,7 +62,7 @@ console.log(`index.js loaded \n${Date()}`);
             width: 500,
             height: 500,
             title: {
-                text:`fit parameters: [${Parms.map(v=>v.toLocaleString())}]`
+                text:`fit parameters: [${Parms.map(v=>v.toString())}]`
             }
         }
 
@@ -71,7 +71,7 @@ console.log(`index.js loaded \n${Date()}`);
         // fill data text textArea
 
         let txt = x.map((xi,i)=>{
-            return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
+            return `\n${xi.toString()}\t${y[i].toString()}\t${z[i].toString()}`
         })
         textAreaData.value=`x\ty\tfit`+txt.join('')
 
@@ -88,7 +88,7 @@ console.log(`index.js loaded \n${Date()}`);
             z=x.map(_=>NaN)
         }
         let txt = x.map((xi,i)=>{
-            return `\n${xi.toLocaleString()}\t${y[i].toLocaleString()}\t${z[i].toLocaleString()}`
+            return `\n${xi.toString()}\t${y[i].toString()}\t${z[i].toString()}`
         })
         return `x\ty\tfit`+txt.join('')
     }
@@ -97,7 +97,7 @@ console.log(`index.js loaded \n${Date()}`);
     modelSel.onchange=async function(opt){
         let modelName = opt.target.value
         model = (await import(`./fun.mjs`))[modelName]
-        textAreaEq.value = model.toLocaleString()
+        textAreaEq.value = model.toString()
     }
     // load test data if it exists
     loadTestDataBt.onclick= async function(){
@@ -110,13 +110,60 @@ console.log(`index.js loaded \n${Date()}`);
         // check for test data
         if(model.test){
             console.log(`testData:`,model.test)
-            textAreaData.value=writeData(model.test.x,model.test.y)
+            textAreaData.value=writeData(model.test.x,model.test.y.map(yi=>yi.toLocaleString()))
         }
         console.log(model)
-        //modelSel.value
-        //4
     }
-    textAreaEq.value = ((await import(`./fun.mjs`))['logistic']).toLocaleString()
+    plotDataBt.onclick=function(){
+        // get the data from textAreaData
+        let dt = (textAreaData.value.split(/\n/).map(row=>row.split(/\t/))).slice(1)
+        // transpose
+        function dtParse(a){
+            if(a=='NaN'){
+                return NaN
+            }else{
+                return JSON.parse(a)
+            }
+        } 
+        let x = dt.map(row=>dtParse(row[0]))
+        let y = dt.map(row=>dtParse(row[1]))
+        let z = dt.map(row=>dtParse(row[2]))
+        let traceData = {
+            x: x,
+            y: y,
+            name:'data',
+            mode: 'markers',
+            marker: {
+                color: 'rgba(156, 165, 196, 0.5)',
+                line: {
+                    color: 'rgba(0, 0, 255, 1)',
+                    width: 1,
+                }
+            }
+        }
+        let traceModel={
+            x:x,
+            y:z,
+            name:'model',
+            mode:'lines',
+            type:'scatter',
+            line:{
+                color:'red',
+                width:3
+            }
+        }
+        const layout = {
+            width: 500,
+            height: 500,
+            title: {
+                //text:`fit parameters: [${Parms.map(v=>v.toString())}]`
+            }
+        }
+        fminsearch.plotly.newPlot(graphDiv,[traceData,traceModel],layout)
+        4
+    }
+    // logistic default model
+    textAreaEq.value = ((await import(`./fun.mjs`))['logistic'])//.toString()
     // styling
     textAreaEq.style.width="100%"
     textAreaData.style.width="15em"
