@@ -176,7 +176,7 @@ console.log(`index.js loaded \n${Date()}`);
     textAreaEq.value = ((await import(`./fun.mjs`))['logistic'])//.toString()
     // styling
     textAreaEq.style.width="100%"
-    textAreaData.style.width="15em"
+    textAreaData.style.width="30em"
 }
 )()
 
