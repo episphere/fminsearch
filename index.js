@@ -112,8 +112,18 @@ console.log(`index.js loaded \n${Date()}`);
             console.log(`testData:`,model.test)
             textAreaData.value=writeData(model.test.x,model.test.y.map(yi=>yi.toLocaleString()))
         }
+        if(model.parms){
+            parameters.value=model.parms
+        }
         console.log(model)
     }
+    
+    runModelBt.onclick=async function(){
+        model = (await import(`./fun.mjs`))[modelSel.value]
+        model.test.z=model(model.test.x,model.parms)
+        textAreaData.value=writeData(model.test.x,model.test.y,model.test.z)
+    }
+    
     plotDataBt.onclick=function(){
         // get the data from textAreaData
         let dt = (textAreaData.value.split(/\n/).map(row=>row.split(/\t/))).slice(1)
