@@ -1,44 +1,56 @@
 <html>
-<head>
-    <link href="https://episphere.github.io/gps/gps.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <hr>
-    <h1>
-        <b style="font-family:fantasy">f<sub>min</sub> Search</b>
+    <head>
+        <link href="https://episphere.github.io/gps/gps.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <hr>
+        <h1>
+            <b style="font-family:fantasy">
+                f<sub>min</sub>
+                Search
+            </b>
+            <br>
+            <sup style="font-size:small;font-weight:bold">
+                [<a href="https://github.com/episphere/fminsearch" target="_blank">Code</a>
+                ] [<a href="https://observablehq.com/@episphere/fminsearch" target="_blank">Notebook</a>
+                ] [<a href="https://github.com/episphere/fminsearch/issues" target="_blank">Issues</a>
+                ] [<a href="https://github.com/episphere/fminsearch/wiki" target="_blank">Docs</a>
+                ]
+        
+            </sup>
+        </h1>
+        <hr>
+        <h3>Examples </h3>
+        <p>
+            You can put the equation in the text area below, it's URL, or you can select from drop down <button id="demo">demo</button>
+            .
+        </p>
+        <textarea id="textAreaEq" style="height:100"></textarea>
         <br>
-        <sup style="font-size:small;font-weight:bold">
-            [<a href="https://github.com/episphere/fminsearch" target="_blank">Code</a>
-            ] [<a href="https://observablehq.com/@episphere/fminsearch" target="_blank">Notebook</a>
-            ] [<a href="https://github.com/episphere/fminsearch/issues" target="_blank">Issues</a>
-            ] [<a href="https://github.com/episphere/fminsearch/wiki" target="_blank">Docs</a>
-            ]
-        </sup>  
-    </h1>
-    <hr>
-    <h3>Examples </h3>
-    <p>You can put the equation in the text area below, it's URL, or you can select from drop down <button id="demo">demo</button>.</p>
-    <textarea id="textAreaEq" style="height:100"></textarea><br>
-    <select id="modelSel">
-        <option>logistic</option>
-        <option>rational</option>
-        <option>...</option>
-        <option>fetch</option>
-    </select>
-    <button id="loadTestDataBt">Load test data</button>
-    <button id="plotDataBt">Plot data</button>
-    <button>Load data</button>
-    <button>Fit model</button>
-    <table>
-        <tr><td>
-            <textarea id="textAreaData" style="height:500"></textarea>
-        </td><td>
-            <div id="graphDiv"></div>
-        </td></tr>
-    </table>
-</head>
-<body>
-
-</body>
-    <script src="./index.js" defer></script>
-    <!-- <script src="fminsearch.js"></script> -->
+        <select id="modelSel">
+            <option>logistic</option>
+            <option>rational</option>
+            <option>...</option>
+            <option>fetch</option>
+        </select>
+        <button id="loadTestDataBt">Load test data</button>
+        <button id="plotDataBt">Plot data</button>
+        <button>Load data</button>
+        <button>Fit model</button>
+        <table>
+            <tr>
+                <td>
+                    <textarea id="textAreaData" style="height:500"></textarea>
+                </td>
+                <td>
+                    <div id="graphDiv"></div>
+                </td>
+            </tr>
+        </table>
+        <textarea id="parameters" style="width: 15em;">...</textarea>
+    </body>
+</html>
+</body><script src="./index.js" defer></script>
+<!-- <script src="fminsearch.js"></script> -->
 </html>
