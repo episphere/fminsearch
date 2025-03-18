@@ -11,6 +11,9 @@ logistic.test={
     x: [...Array(101)].map((_,i)=>(i)/10)
 }
 logistic.test.y=logistic(logistic.test.x,[-10,3]).map(xi=>(xi+Math.random()*0.1-0.05).toString().slice(0,6))
+// initial parameters
+logistic.Parms=[0.5,-0.5]
+
 
 // rational
 function rational(x,P){
