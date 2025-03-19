@@ -127,14 +127,22 @@ console.log(`index.js loaded \n${Date()}`);
     parameters.onkeyup=function(){
         model.parms=parameters.value.split(',').map(xi=>JSON.parse(xi))
         runModelBt.click()
-        plotDataBt.click()
+        setTimeout(function(){
+            //console.log(Date())
+            plotDataBt.click()
+        },1)
+        //plotDataBt.click()
     }
 
     fitModel.onclick = async function(){
         model.parms = fminsearch.fminsearch(model,model.parms,model.test.x,model.test.y)
         parameters.value=model.parms
         runModelBt.click()
-        plotDataBt.click()
+        setTimeout(function(){
+            //console.log(Date())
+            plotDataBt.click()
+        },1)
+        //plotDataBt.click()
         //setTimeout(function(){plotDataBt.click()},1000)
     }
     
