@@ -123,6 +123,20 @@ console.log(`index.js loaded \n${Date()}`);
         model.test.z=model(model.test.x,model.parms)
         textAreaData.value=writeData(model.test.x,model.test.y,model.test.z)
     }
+
+    parameters.onkeyup=function(){
+        model.parms=parameters.value.split(',').map(xi=>JSON.parse(xi))
+        runModelBt.click()
+        plotDataBt.click()
+    }
+
+    fitModel.onclick = async function(){
+        model.parms = fminsearch.fminsearch(model,model.parms,model.test.x,model.test.y)
+        parameters.value=model.parms
+        runModelBt.click()
+        plotDataBt.click()
+        //setTimeout(function(){plotDataBt.click()},1000)
+    }
     
     plotDataBt.onclick=function(){
         // get the data from textAreaData
