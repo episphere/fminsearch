@@ -62,7 +62,10 @@ console.log(`index.js loaded \n${Date()}`);
             width: 500,
             height: 500,
             title: {
-                text:`fit parameters: [${Parms.map(v=>v.toString())}]`
+                text:`fit parameters: [${Parms.map(v=>v.toString())}]`,
+                font:{
+                        size:1
+                }
             }
         }
 
@@ -90,7 +93,11 @@ console.log(`index.js loaded \n${Date()}`);
         let txt = x.map((xi,i)=>{
             return `\n${xi.toString()}\t${y[i].toString()}\t${z[i].toString()}`
         })
-        return `x\ty\tfit`+txt.join('')
+        if(model.head){
+            return `${model.head[0]}\t${model.head[1]}\t${model.head[2]}`+txt.join('')
+        }else{
+            return `x\ty\tfit`+txt.join('')
+        }  
     }
     
     // Select model
@@ -110,7 +117,7 @@ console.log(`index.js loaded \n${Date()}`);
         // check for test data
         if(model.test){
             console.log(`testData:`,model.test)
-            textAreaData.value=writeData(model.test.x,model.test.y.map(yi=>yi.toLocaleString()))
+            textAreaData.value=writeData(model.test.x,model.test.y)
         }
         if(model.parms){
             parameters.value=model.parms
@@ -122,6 +129,11 @@ console.log(`index.js loaded \n${Date()}`);
         model = (await import(`./fun.mjs`))[modelSel.value]
         model.test.z=model(model.test.x,model.parms)
         textAreaData.value=writeData(model.test.x,model.test.y,model.test.z)
+    }
+
+    textAreaData.onkeyup=function(){
+        model.head = textAreaData.value.match(/^[^\n]*/)[0].split(/\t/) // update model.head
+        plotDataBt.click()
     }
 
     parameters.onkeyup=function(){
@@ -148,6 +160,9 @@ console.log(`index.js loaded \n${Date()}`);
     
     plotDataBt.onclick=function(){
         // get the data from textAreaData
+        if(!model.head){
+            model.head = textAreaData.value.match(/^[^\n]*/)[0].split(/\t/)
+        }
         let dt = (textAreaData.value.split(/\n/).map(row=>row.split(/\t/))).slice(1)
         // transpose
         function dtParse(a){
@@ -180,15 +195,35 @@ console.log(`index.js loaded \n${Date()}`);
             mode:'lines',
             type:'scatter',
             line:{
-                color:'red',
+                color:'rgba(255, 0, 0, 0.7)',
                 width:3
             }
         }
         const layout = {
+            xaxis: {
+                title:{
+                    text:model.head[0],
+                    font:{
+                        size:14
+                    }
+                }
+            },
+            yaxis: {
+                title:{
+                    text:model.head[1],
+                    font:{
+                        size:14
+                    }
+                }
+            },
             width: 500,
             height: 500,
             title: {
                 //text:`fit parameters: [${Parms.map(v=>v.toString())}]`
+                text:model.head[2],
+                font:{
+                        size:16
+                }
             }
         }
         fminsearch.plotly.newPlot(graphDiv,[traceData,traceModel],layout)
