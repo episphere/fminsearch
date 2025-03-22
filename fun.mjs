@@ -36,16 +36,21 @@ fetch('./expLinearPredictors.json')
     .then(x=>{expLinearPredictors=x})
 //let expLinearPredictors await (await fetch('./expLinearPredictors.json')).json()
 function weibullCdfModel(x, P) {
+  console.log(P)
   const k = P[0];
   const logb = P[1];
   const b = Math.exp(logb);
-  console.log(P)
   const n = expLinearPredictors.length;
   return x.map((t) => {
     let sumSurv = 0;
     for (let i = 0; i < n; i++) {
       sumSurv += Math.exp(-b * expLinearPredictors[i] * Math.pow(t, k));
     }
+    /*
+    let sumSurv = expLinearPredictors
+        .map(expLinearPredictor=>Math.exp(-b * expLinearPredictor * Math.pow(t, k)))
+        .reduce((x1,x2)=>x1+x2)
+    */
     const avgSurv = sumSurv / n;
     return 1 - avgSurv;
   });
