@@ -21,14 +21,14 @@
             </sup>
         </h1>
         <hr>
-        <h3>Examples </h3>
+        <h3>Stocastic Direction Descent (SDD)</h3>
         <p>
             You can put the equation in the text area below, it's URL, or you can select from the model drop down.
-            For a one-click feeling of how fast this <a href="https://github.com/episphere/fminsearch/wiki" target="_blank">in-browser stochastic descent implementation</a> converge, click this <button id="demo">demo</button> button.
-            Each click will generate a logistic model, use it to generate noisy data, and parameterize it back.
+            For a one-click feeling for how fast this <a href="https://github.com/episphere/fminsearch/wiki" target="_blank">in-browser SDD implementation</a> converge, click this <button id="demo">demo</button> button.
+            Each click will generate a logistic model, use it to generate noisy data, and parameterize it back to the model.
         </p>
         <p>
-            To follow regression by the application, open devtools console. The generic use starts by loading the data, running the model, plotting both, and finally fit the model parameters.
+            To follow the regression process, open the browser devtools console. The generic use starts by 1) loading the data, 2) running the model, 3) plotting both, and 4) finally fit the model parameters.
             Slower, more complex functions, such as weibullCdfModel, will tipically report progress in the console.
             You can also follow regression step by step by setting number of iterations to a low value, and then pressing "Fit" repeatedly. 
             Note that if that allowed iterations number is too low, for example 10, the non-linear regression may not have enough iterations to start converging for spme models.
