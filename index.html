@@ -23,8 +23,12 @@
         <hr>
         <h3>Examples </h3>
         <p>
-            You can put the equation in the text area below, it's URL, or you can select from drop down <button id="demo">demo</button>
-            .
+            You can put the equation in the text area below, it's URL, or you can select from the model drop down.
+            For a one-click feeling of how fast does this in-browser does the stochastic descent converge, click this <button id="demo">demo</button> button. 
+            To follow regression step by step, open devtools console: slower, more complex functions, such as weibullCdfModel, will tipically report progress there.
+            You can also follow regression step by step by setting number of iterations to a low value and then pressing "Fit" repeatedly. 
+            Note, however, that if that number is too low, for example 10, the non-linear regression may not have enough iterations to start converging.
+            
         </p>
         <textarea id="textAreaEq" style="height:100"></textarea>
         <br>
@@ -39,6 +43,7 @@
         <button id="runModelBt">Run</button>
         <button id="plotDataBt">Plot</button>
         <button id="fitModel">Fit</button>
+        <input id="iterations" type="number" value=1000 style="width:6em">
         <table>
             <tr>
                 <td>

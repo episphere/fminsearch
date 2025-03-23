@@ -36,7 +36,7 @@ fetch('./expLinearPredictors.json')
     .then(x=>{expLinearPredictors=x})
 //let expLinearPredictors await (await fetch('./expLinearPredictors.json')).json()
 function weibullCdfModel(x, P) {
-  console.log(P)
+  console.log(P) // note console.log tipically adds less than 5% to compute time
   const k = P[0];
   const logb = P[1];
   const b = Math.exp(logb);

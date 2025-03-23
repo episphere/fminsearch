@@ -147,16 +147,42 @@ console.log(`index.js loaded \n${Date()}`);
     }
 
     fitModel.onclick = async function(){
-        model.parms = fminsearch.fminsearch(model,model.parms,model.test.x,model.test.y)
-        parameters.value=model.parms
-        runModelBt.click()
+        fitModel.textContent='console...'
+        fitModel.style.color='red'
         setTimeout(function(){
-            //console.log(Date())
-            plotDataBt.click()
-        },1)
+            let opt = {maxIter:parseInt(iterations.value)}
+            model.parms = fminsearch.fminsearch(model,model.parms,model.test.x,model.test.y,opt)
+            fitModel.textContent='Fit'
+            parameters.value=model.parms
+            setTimeout(function(){
+                runModelBt.click()
+                setTimeout(function(){
+                   plotDataBt.click()
+                   fitModel.textContent='Fit'
+                   fitModel.style.color='blue'
+                },10)
+            },10)
+        },10)
         //plotDataBt.click()
         //setTimeout(function(){plotDataBt.click()},1000)
     }
+    /*
+    fitModel.onclick = async function(){
+        fitModel.textContent='Fitting model, check progress in console ...'
+        fitModel.style.color='red'
+        model.parms = fminsearch.fminsearch(model,model.parms,model.test.x,model.test.y)
+        setTimeout(function(){
+            parameters.value=model.parms
+            runModelBt.click()
+            //console.log(Date())
+            plotDataBt.click()
+            fitModel.textContent='Fit'
+            fitModel.style.color='navy'
+        },100)
+        //plotDataBt.click()
+        //setTimeout(function(){plotDataBt.click()},1000)
+    }
+    */
     
     plotDataBt.onclick=function(){
         // get the data from textAreaData
