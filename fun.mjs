@@ -29,12 +29,15 @@ rational.test={
 rational.parms=[100,30,10,5000]
 
 //______________________________________________________
+// weibullCdfModel
 // see https://observablehq.com/d/8513735b65901705
 let expLinearPredictors = [];
 fetch('./expLinearPredictors.json')
     .then(x=>x.json())
     .then(x=>{expLinearPredictors=x})
-//let expLinearPredictors await (await fetch('./expLinearPredictors.json')).json()
+// sample 1000
+expLinearPredictors.filter((xi,i)=>((i/100)==Math.round(i/100)))
+//let expLinearPredictors = await (await fetch('./expLinearPredictors.json')).json()
 function weibullCdfModel(x, P) {
   console.log(P) // note console.log tipically adds less than 5% to compute time
   const k = P[0];
