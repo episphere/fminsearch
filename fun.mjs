@@ -35,11 +35,10 @@ let expLinearPredictors = [];
 fetch('./expLinearPredictors.json')
     .then(x=>x.json())
     .then(x=>{expLinearPredictors=x})
-// sample 1000
-expLinearPredictors.filter((xi,i)=>((i/100)==Math.round(i/100)))
-//let expLinearPredictors = await (await fetch('./expLinearPredictors.json')).json()
 function weibullCdfModel(x, P) {
   console.log(P) // note console.log tipically adds less than 5% to compute time
+  //sample 10000
+  expLinearPredictors = expLinearPredictors.filter((xi,i)=>((i/10)==Math.round(i/10)))
   const k = P[0];
   const logb = P[1];
   const b = Math.exp(logb);
