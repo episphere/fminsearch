@@ -166,6 +166,9 @@ console.log(`index.js loaded \n${Date()}`);
         //plotDataBt.click()
         //setTimeout(function(){plotDataBt.click()},1000)
     }
+    reset.onclick=function(){
+        location.href=location.href
+    }
     /*
     fitModel.onclick = async function(){
         fitModel.textContent='Fitting model, check progress in console ...'
