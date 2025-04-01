@@ -1,7 +1,7 @@
 // moving fminsearch to ES6 - under development!
 
 console.log(`fminsearch ES6 module loaded\n${Date()}`)
-const plotly = (await import('https://cdn.jsdelivr.net/npm/plotly.js-dist@3.0.0/+esm')).default
+const plotly = (await import('https://cdn.jsdelivr.net/npm/plotly.js-dist@3.0.1/+esm')).default
 
 function logistic(x,P){
     return x.map(
